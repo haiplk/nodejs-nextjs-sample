@@ -1,5 +1,7 @@
-import { Router } from "express";
 import { createBook, getBook, getBooks } from "../controllers/bookController";
+import { requestValidator } from "../middlewares/requestValidator";
+import { bookValidationSchema } from "../validators/bookValidator";
+import { Router } from "express";
 
 const bookRouters = Router();
 
@@ -9,7 +11,7 @@ const bookRouters = Router();
  *   post:
  *     summary: Create a book
  */
-bookRouters.post('/', createBook);
+bookRouters.post('/', requestValidator(bookValidationSchema), createBook);
 
 /**
  * @swagger

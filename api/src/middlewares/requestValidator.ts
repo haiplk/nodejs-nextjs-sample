@@ -1,10 +1,11 @@
-import { Request, Response, NextFunction } from 'express-serve-static-core';
+import { Request, Response, NextFunction } from 'express';
 import { ObjectSchema } from 'joi';
 
-export const requestValidator = (schema: ObjectSchema) => (req: Request, res: Response, next: NextFunction) => {
+export const requestValidator = (schema: ObjectSchema) => (req: any, res: any, next: any) => {
     const { error } = schema.validate(req.body);
     if (error) {
-        return res.status(400).json({ errors: error.details });
+        return res.status(400).json({ errors: error.message });
     }
-    next();
+
+    if(next) next(); 
 };
