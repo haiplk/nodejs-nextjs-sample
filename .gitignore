@@ -1,3 +1,5 @@
 node_modules
 dist
 logs
+api/.env
+api/.env
