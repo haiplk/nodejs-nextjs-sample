@@ -1,6 +1,7 @@
 export interface BookRequest {
-    title?: string;
-    author?: string;
+    title?: string | null;
+    author?: string | null;
+    description?: string | null;
 }
 
 
