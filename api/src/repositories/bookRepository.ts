@@ -16,21 +16,35 @@ export const createBook = async (book: BookRequest): Promise<Book> => {
 
 
 export const getBooks = async (): Promise<Book[]> => {
-	const books = await prisma.book.findMany();
+	const books = await prisma.book.findMany({
+		where: { isDeleted: false },
+	});
 	return books;
 };
 
 export const getBook = async (id: string): Promise<Book | null> => {
 	const book = await prisma.book.findUnique({
-		where: { id: id },
+		where: { id: id, isDeleted: false },
 	});
 
 	return book;
 };
 
+export const deleteBook = async (id: string): Promise<boolean> => {
+	await prisma.book.update({
+		where: { id: id },
+		data: {
+			isDeleted: true
+		}
+	});
+
+	return true;
+};
+
+
 export const updateBook = async (id: string, update: BookRequest): Promise<Book | null> => {
 	const book = await prisma.book.findUnique({
-		where: { id: id },
+		where: { id: id, isDeleted: false },
 	});
 
 	if (!book) {

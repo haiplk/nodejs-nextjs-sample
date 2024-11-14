@@ -31,3 +31,8 @@ export const getBook = async (id: string): Promise<BookResponse | null> => {
 
     return null;
 };
+
+export const deleteBook = async (id: string): Promise<boolean> => {
+    return await bookRepository.deleteBook(id);
+};
+

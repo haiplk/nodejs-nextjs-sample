@@ -1,4 +1,4 @@
-import { createBook, getBook, getBooks, updateBook } from "../controllers/bookController";
+import { createBook, getBook, getBooks, updateBook, deleteBook } from "../controllers/bookController";
 import { requestValidator } from "../middlewares/requestValidator";
 import { bookValidationSchema } from "../validators/bookValidator";
 import { Router } from "express";
@@ -33,8 +33,16 @@ bookRouters.get('/:id', getBook);
  * @swagger
  * /api/books/:id:
  *   put:
- *     summary: Retrieve a book
+ *     summary: Update a book
  */
 bookRouters.put('/:id', updateBook);
+
+/**
+ * @swagger
+ * /api/books/:id:
+ *   delete:
+ *     summary: Delete a book
+ */
+bookRouters.delete('/:id', deleteBook);
 
 export default bookRouters;

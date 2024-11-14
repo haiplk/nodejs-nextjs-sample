@@ -33,3 +33,9 @@ export const getBook = async (req: Request, res: Response) => {
         res.status(404).json({});
     }
 };
+
+export const deleteBook = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const book = await bookService.deleteBook(id);
+    res.status(204).json({});
+};
