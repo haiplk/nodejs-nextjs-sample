@@ -1,17 +1,17 @@
-import { BookModel } from "../models/book"
+import { Book } from "@prisma/client";
+import prisma from "../libs/prisma";
 import { BookRequest } from "../types/bookType";
 
-export const createBook = (book: BookRequest): BookModel => {
-  return { title: 'Test title', author: book.author };
+export const createBook = (book: BookRequest): Book => {
+  throw new Error();
 };
 
 
-export const getBooks = (): BookModel[] => {
-  return [
-    { title: 'Test title' }
-  ]
+export const getBooks = async (): Promise<Book[]> => {
+  const books = await prisma.book.findMany();
+  return books;
 };
 
-export const getBook = (id: string): BookModel => {
-  return { title: 'Test title', id: id };
+export const getBook = (id: string): Book => {
+  throw new Error();
 };

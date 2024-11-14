@@ -7,8 +7,8 @@ export const createBook = (req: Request, res: Response) => {
     res.status(201).json(book);
 };
 
-export const getBooks = (req: Request, res: Response) => {
-    const books = bookService.getBooks();
+export const getBooks = async (req: Request, res: Response) => {
+    const books = await bookService.getBooks();
     res.json(books);
 };
 
