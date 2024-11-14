@@ -9,13 +9,14 @@ export const loggerMiddleware = (req: Request, res: Response, next?: NextFunctio
     // Attach request ID to request and response
     // req.requestId = requestId;
     res.setHeader('X-Request-ID', requestId);
+    const prefix = `[${requestId}]: ${req.method} ${req.url}`;
 
-    logger.info(`Incoming request [${requestId}]: ${req.method} ${req.url}`);
+    logger.info(`Incoming request ${prefix}`);
 
     // Log response after response is sent
     res.on('finish', () => {
         const duration = Date.now() - start;
-        logger.info(`Completed request [${requestId}]: ${req.method} ${req.url} - ${res.statusCode} - ${duration}ms`);
+        logger.info(`Completed request ${prefix} - ${res.statusCode} - ${duration}ms`);
     });
 
     if (next)
