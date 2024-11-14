@@ -12,8 +12,13 @@ export const getBooks = async (req: Request, res: Response) => {
     res.json(books);
 };
 
-export const getBook = (req: Request, res: Response) => {
+export const getBook = async (req: Request, res: Response) => {
     const id = req.params.id;
-    const book = bookService.getBook(id);
-    res.json(book);
+    const book = await bookService.getBook(id);
+    if(book) {
+        res.json(book);
+    }
+    else {
+        res.status(404).json({});
+    }
 };

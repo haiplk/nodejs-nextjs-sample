@@ -12,6 +12,11 @@ export const getBooks = async (): Promise<Book[]> => {
   return books;
 };
 
-export const getBook = (id: string): Book => {
-  throw new Error();
+export const getBook = async (id: string): Promise<Book | null> => {
+  const book = await prisma.book.findUnique({
+    where: { id: id },
+  });
+
+  return book;
+
 };

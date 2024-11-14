@@ -14,7 +14,7 @@ export const getBooks = async (): Promise<BookResponse[]> => {
 };
 
 
-export const getBook = (id: string): BookResponse => {
-    const book = bookRepository.getBook(id);
-    return mapBookToResponse(book);
+export const getBook = async (id: string): Promise<BookResponse | null> => {
+    const book = await bookRepository.getBook(id);
+    return book;
 };
